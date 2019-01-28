@@ -20,6 +20,7 @@ function createFireDataStructure() {
 }
 
 function renderFire() {
+    const debug = false
     let html = '<table cellpadding=0 cellspacing=0>'
 
     for (let row = 0; row < fireHeight; row++) {        
@@ -29,10 +30,23 @@ function renderFire() {
             const pixelIndex = column + (fireWidth * row)
             const fireIntesity = firePixelArray[pixelIndex]
 
-            html += '<td>'
-            html += `<div class="pixel-index">${pixelIndex}</div>`
-            html += fireIntesity
-            html += '</td>'
+            if(debug == true) {
+
+                html += '<td>'
+                html += `<div class="pixel-index">${pixelIndex}</div>`
+                html += fireIntesity
+                html += '</td>'
+
+            } else {
+
+                const color = fireColorsPalette[fireIntesity]
+                const colorString = `${color.r}, ${color.g}, ${color.b}`
+                html += `<td style="background-color: rgb(${colorString})">`
+                html += '</td>'
+
+            }
+
+           
         }
 
         html += '</tr>'
